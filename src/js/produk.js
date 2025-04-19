@@ -1,7 +1,8 @@
 const produkAPI = 'https://pemweb-backend-mocha.vercel.app/produk'; 
 
 function tampilkanProduk() {
-  axios.get(produkAPI)
+  // Menambahkan { withCredentials: true } pada request
+  axios.get(produkAPI, { withCredentials: true })
     .then(response => {
       const data = response.data;
       const productList = document.getElementById('productList');
