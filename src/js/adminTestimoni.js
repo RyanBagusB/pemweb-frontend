@@ -1,4 +1,4 @@
-const apiUrl = 'https://pemweb-backend-mocha.vercel.app/testimoni'; 
+const apiUrl = 'https://pemweb-backend-mocha.vercel.app/testimoni';
 // READ
 function loadTestimoniAdmin() {
   axios.get(apiUrl)
@@ -15,7 +15,6 @@ function loadTestimoniAdmin() {
           : `<span class="badge bg-secondary badge-status" >Disembunyikan</span>`;
 
         const row = document.createElement('tr');
-
         row.innerHTML = `
           <td class="text-center">${index + 1}</td>
           <td>
@@ -26,11 +25,15 @@ function loadTestimoniAdmin() {
           <td>${item.pesan}</td>
           <td class="text-center">${statusBadge}</td>
           <td class="text-center">
-            <button class="btn btn-sm btn-toggle btn-dark" onclick="toggleStatus(${item.id}, '${item.status}')">
+            <button class="btn btn-sm btn-toggle btn-dark">
               ${item.status === 'tampil' ? 'Sembunyikan' : 'Tampilkan'}
             </button>
           </td>
         `;
+
+        row.querySelector('button.btn').addEventListener('click', () => {
+          toggleStatus(item._id, item.status);
+        })
 
         tableBody.appendChild(row);
       });
@@ -43,7 +46,7 @@ function loadTestimoniAdmin() {
 function toggleStatus(id, currentStatus) {
   const newStatus = currentStatus === 'tampil' ? 'sembunyi' : 'tampil';
 
-  axios.patch(`${apiUrl}/${id}`, { status: newStatus })
+  axios.put(`${apiUrl}/${id}`, { status: newStatus })
     .then(() => {
       loadTestimoniAdmin();
     })

@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('productForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const id = document.getElementById('productId').value;
+  const urlParams = new URLSearchParams(window.location.search);
+  const id = urlParams.get('id');
   const produk = {
     nama: document.getElementById('namaProduk').value,
     kategori: document.getElementById('kategoriProduk').value,
@@ -41,14 +42,6 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
         window.location.href = 'adminbarang.html'; 
       })
       .catch(error => console.error('Error updating product:', error));
-  } else {
-
-    axios.post(apiUrl, produk)
-      .then(() => {
-        alert('Produk berhasil ditambahkan!');
-        window.location.href = 'adminbarang.html';
-      })
-      .catch(error => console.error('Error adding product:', error));
   }
 });
 

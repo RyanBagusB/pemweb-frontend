@@ -3,6 +3,7 @@ const apiUrl = 'https://pemweb-backend-mocha.vercel.app/produk';
 function loadProdukAdmin() {
   axios.get(apiUrl)
     .then(response => {
+      console.log(response);
       const data = response.data;
       const tableBody = document.getElementById('productTableBody');
       tableBody.innerHTML = '';
@@ -17,12 +18,14 @@ function loadProdukAdmin() {
             <td>${item.deskripsi}</td>
             <td><img src="${item.foto}" alt="${item.nama}" width="100" height="70" style="object-fit:cover;"></td>
             <td>
-              <a href="admincrudform.html?id=${item.id}" class="btn btn-warning btn-sm mb-1"><i class="fas fa-edit"></i> Edit</a>
-              <button class="btn btn-danger btn-sm" onclick="hapusProduk('${item.id}')"><i class="fas fa-trash"></i> Hapus
+              <a href="admincrudform.html?id=${item._id}" class="btn btn-warning btn-sm mb-1"><i class="fas fa-edit"></i> Edit</a>
+              <button class="btn btn-danger btn-sm" onclick="hapusProduk('${item._id}')"><i class="fas fa-trash"></i> Hapus
               </button>
             </td>
           </tr>
         `;
+
+        
       });
     })
     .catch(error => {
