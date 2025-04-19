@@ -1,6 +1,5 @@
-const apiUrl = 'https://pemweb-backend-mocha.vercel.app/produk';
+const apiUrl = 'http://localhost:5000/produk';
 
-// 
 document.addEventListener('DOMContentLoaded', function() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get('id');
@@ -42,6 +41,13 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
         window.location.href = 'adminbarang.html'; 
       })
       .catch(error => console.error('Error updating product:', error));
+  } else {
+    axios.post(apiUrl, produk)
+      .then(() => {
+        alert('Produk berhasil ditambahkan!');
+        window.location.href = 'adminbarang.html';
+      })
+      .catch(error => console.error('Error adding product:', error));
   }
 });
 
