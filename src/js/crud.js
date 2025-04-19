@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:5000/produk';
+const apiUrl = 'https://pemweb-backend-mocha.vercel.app/produk';
 
 document.addEventListener('DOMContentLoaded', function() {
   const urlParams = new URLSearchParams(window.location.search);
